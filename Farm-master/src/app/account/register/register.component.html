@@ -1,0 +1,50 @@
+
+<body>
+  <div class="container card" style="width: 600px; padding: 50px;">
+      <i class="fa fa-arrow-left" (click)="back()"></i>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="text-center mb-4">
+              <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+          </div>
+
+          <app-text-input formControlName="firstName" [label]="'First Name'"></app-text-input>
+          <app-text-input formControlName="lastName" [label]="'Last Name'"></app-text-input>
+          <app-text-input formControlName="phone" [label]="'Phone Number'"></app-text-input>
+          <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
+          <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+
+          <div class="form-group">
+
+            <input type="password" style="height: 50px;"
+            [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors
+            && registerForm.get('confirmPassword').touched
+            || registerForm.get('confirmPassword').touched
+            && registerForm.hasError('mismatch')}"
+            class="form-control" placeholder="Confirm Password" formControlName="confirmPassword">
+
+            <div class="invalid-feedback"
+            *ngIf="registerForm.get('confirmPassword').hasError('required')
+            && registerForm.get('confirmPassword').touched">Password is required
+            </div>
+
+            <div class="invalid-feedback"
+            *ngIf="registerForm.hasError('mismatch')
+            && registerForm.get('confirmPassword').touched">Password must match
+            </div>
+
+        </div>
+
+          <ul class="text-danger list-unstyled" *ngIf="errors">
+              <li *ngFor="let error of errors">
+                  {{error}}
+              </li>
+          </ul>
+          <br>
+
+          <mat-checkbox style="margin-left: 10px; margin-bottom: 20px;" (change)="test($event)">Accept our terms & conditions</mat-checkbox>
+          <br>
+
+          <button [disabled]="registerForm.invalid || !checked" class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+      </form>
+  </div>
+</body>

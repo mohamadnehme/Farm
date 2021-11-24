@@ -1,0 +1,24 @@
+<div id="content" class="p-4 p-md-5 pt-5">
+<div class="mt-4" [formGroup]="checkoutForm" style="min-height: 670px;">
+  <div class="row">
+      <div style="margin-left: 25px;" class="form-group col-9" formGroupName="paymentForm">
+          <app-text-input [label]="'Name on card'" formControlName="nameOnCard"></app-text-input>
+      </div>
+      <form id="payment-form">
+        <div #cardNumber class="StripeElement">
+          <!--Stripe.js injects the Payment Element-->
+        </div>
+        <div id="payment-message" class="hidden"></div>
+      </form>
+      <button style="margin-top: 200px; margin-left: 40px; width: 555px; height: 50px;"
+          [disabled]="loading
+              || checkoutForm.get('paymentForm').invalid
+              || !cardNumberValid"
+          class="form-group btn btn-primary"
+          (click)="submitOrder(elements)">
+          Submit
+          <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+      </button>
+  </div>
+</div>
+</div>

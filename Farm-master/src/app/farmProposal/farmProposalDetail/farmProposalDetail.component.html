@@ -1,0 +1,57 @@
+<div id="content" class="p-4 p-md-5 pt-5">
+<button class="btn btn-light" (click)="back()">Back</button>
+<div class="container">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" *ngIf="farm">
+      <carousel class="carousel-inner">
+        <slide class="carousel-item active"*ngFor="let photo of farm.photos">
+          <img class="d-block w-100" src="{{photo.url}}" alt="First slide">
+        </slide>
+      </carousel>
+    </div>
+<br>
+
+<form>
+
+    <div class="form-group" *ngIf="farm">
+      <label>Owner Name</label>
+      <input type="text" class="form-control" value="{{farm.ownerName}}" disabled=true>
+      <br>
+
+      <label>Ownership Type</label>
+      <input type="text" class="form-control" value="{{farm.ownershipType}}" disabled=true>
+      <br>
+
+      <label>Owner Email</label>
+      <input type="text" class="form-control" value="{{farm.ownerEmail}}" disabled=true>
+      <br>
+
+      <label>Farm Business Name</label>
+      <input type="text" class="form-control" value="{{farm.farmName}}" disabled=true>
+      <br>
+
+      <label>Agriculture Holding Number</label>
+      <input type="text" class="form-control" value="{{farm.agricultureHoldingNumber}}" disabled=true>
+      <br>
+
+      <label>Location</label>
+      <input type="text" class="form-control" value="{{farm.location}}" disabled=true>
+      <br>
+
+      <label>Area</label>
+      <input type="text" class="form-control" value="{{farm.area}}" disabled=true>
+      <br>
+
+      <label>Soil Type</label>
+      <input type="text" class="form-control" value="{{farm.soilType}}" disabled=true>
+      <br>
+
+      <label>Description</label>
+      <textarea type="text" rows="10" class="form-control" disabled=true> {{farm.description}} </textarea>
+      <br>
+
+
+    </div>
+
+</form>
+</div>
+</div>

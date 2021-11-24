@@ -1,0 +1,76 @@
+<div id="content" class="p-4 p-md-5 pt-5">
+  <div class="container" style="height: 800px; ">
+    <div class="card">
+      <div class="container" style="margin-top: 20px; margin-left: 20px;">
+        <h1 style="color: black; font-weight: 500;">PartnerShip Insights ({{(currentUser$ | async)?.firstName }} {{(currentUser$ | async)?.lastName }})</h1>
+      </div>
+      <hr style="width: 100%;">
+      <div class="row" style="margin-left: 100px;">
+        <div class="col" style="margin-top: 20px;">
+          <div style="margin-left: 110px; position: absolute;">
+            Total Invest
+            <h1 style="color: black;margin-top: 15px ; font-weight: 500; font-size: 2.5rem;">{{totalInvest}}</h1>
+          </div>
+          <img src="../../assets/images/invest.jpg" style="height: 100px; margin-top: 1px;" alt="">
+
+        </div>
+        <div class="col" style="margin-top: 20px;">
+          <div style="margin-left: 100px; position: absolute;">
+            Total Interest
+            <h1 style="color: black;margin-top: 15px ; font-weight: 500; font-size: 2.5rem; ">{{totalInterest}}</h1>
+          </div>
+          <img src="../../assets/images/interest.png" style="height: 80px; margin-top: 13px;" alt="">
+
+        </div>
+        <div class="col">
+          <div style="margin-left: 150px; position: absolute; margin-top: 20px;">
+            Total Expected
+            <h1 style="color: black;margin-top: 15px ; font-weight: 500; font-size: 2.5rem; ">{{totalExpect}}</h1>
+          </div>
+          <img src="../../assets/images/expectd.jpg" style="height: 150px; margin-top: 1px;" alt="">
+
+        </div>
+      </div>
+      <hr style="width: 100%;">
+      <div class="container" style="margin-top: 20px; margin-left: 20px;">
+        <h1 style="color: black; font-weight: 500; margin-bottom: 40px;"></h1>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 50px;">
+      <div class="container" style="margin-top: 20px; margin-left: 20px;">
+        <i class="fa fa-history" style="color: black; font-weight: 500; font-size: 1.5rem;">
+          <span style="margin-left: 20px; font-family: Arial, Helvetica, sans-serif; font-weight: 500;">Investment History</span>
+        </i>
+      </div>
+      <hr style="width: 100%;">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-hover" style="cursor: pointer;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>No</th>
+                        <th>Farm Package</th>
+                        <th>Total Units</th>
+                        <th>Expected Returns</th>
+                        <th>Trade Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <th># {{order.id}}</th>
+                        <td>{{order.orderItems[0].itemOrdered.productName}}</td>
+                        <td>{{order.orderItems[0].quantity}}</td>
+                        <td>{{order.orderItems[0].quantity * (order.orderItems[0].price + order.orderItems[0].interest) | currency}}</td>
+                        <td>{{order.orderDate | date}}</td>
+                        <td>{{order.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

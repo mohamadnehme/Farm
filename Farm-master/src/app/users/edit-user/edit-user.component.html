@@ -1,0 +1,44 @@
+
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-3">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="text-center mb-4">
+              <h1 class="h3 mb-3 font-weight-normal">Update</h1>
+          </div>
+
+          <app-text-input formControlName="firstName" [label]="'First Name'"></app-text-input>
+          <app-text-input formControlName="lastName" [label]="'Last Name'"></app-text-input>
+          <app-text-input formControlName="phone" [label]="'Phone Number'"></app-text-input>
+          <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+
+          <div class="form-group">
+
+            <input type="password" style="height: 50px;"
+            [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors
+            && registerForm.get('confirmPassword').touched
+            || registerForm.get('confirmPassword').touched
+            && registerForm.hasError('mismatch')}"
+            class="form-control" placeholder="confirm Password" formControlName="confirmPassword">
+
+            <div class="invalid-feedback"
+            *ngIf="registerForm.get('confirmPassword').hasError('required')
+            && registerForm.get('confirmPassword').touched">Password is required
+            </div>
+
+            <div class="invalid-feedback"
+            *ngIf="registerForm.hasError('mismatch')
+            && registerForm.get('confirmPassword').touched">Password must match
+            </div>
+
+        </div>
+
+          <ul class="text-danger list-unstyled" *ngIf="errors">
+              <li *ngFor="let error of errors">
+                  {{error}}
+              </li>
+          </ul>
+
+          <button [disabled]="registerForm.invalid" class="btn btn-lg btn-warning btn-block" type="submit">Update</button>
+      </form>
+  </div>
+</div>

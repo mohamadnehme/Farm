@@ -1,0 +1,16 @@
+<body>
+  <div class="container card" style="width: 600px; padding: 50px;">
+    <i class="fa fa-arrow-left" (click)="back()"></i>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h1 class="h3 mb-3 fw-normal text-center">Sign In</h1>
+
+      <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input><br>
+      <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input><br>
+
+      <button [disabled]="loginForm.invalid" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form>
+
+  </div>
+
+</body>
+

@@ -1,0 +1,28 @@
+<div class="card" style="margin-bottom: 30px;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <img src="{{product.pictureUrl }}"
+        style="border-radius: 5px; width: 900px; height: 220px;">
+      </div>
+      <div class="col">
+        <i class="fa fa-trash pull-right" *ngIf="(currentUser$ | async).role === 'admin'" style="font-size: 24px; color: red;" (click)="remove(product)"></i>
+        <h1 style="font-size: 25px; color: black; margin-top: 10px;">{{product.name | titlecase}}</h1>
+        <h3>{{product.location}}</h3>
+        <h1 style="font-size: 25px; color: #88c13e;">${{product.price}} Per Unit</h1>
+        <button routerLink="/shop/{{product.id}}" *ngIf="!product.isSoldOut"
+          style=" width: 400px; margin-top: 25px; height: 45px; font-weight: 500;"
+          class="btn btn-primary">
+          LEARN MORE
+        </button>
+        <button routerLink="/shop/{{product.id}}" *ngIf="product.isSoldOut"
+          style=" width: 400px; margin-top: 25px; height: 45px; font-weight: 500;"
+          class="btn btn-secondary">
+          Sold Out
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

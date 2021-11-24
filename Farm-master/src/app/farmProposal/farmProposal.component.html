@@ -1,0 +1,46 @@
+<div id="content" class="p-4 p-md-5 pt-5">
+<div class="container">
+  <div class="py-5">
+      <div class="input-group">
+
+      </div>
+  </div>
+</div>
+<div class="container" style="margin-top: 50px;">
+<div class="row">
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <caption>List of farm proposals</caption>
+            <thead>
+              <tr class="table-active">
+                <th scope="col">ID</th>
+                <th scope="col">Owner Name</th>
+                <th scope="col">Owner Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Farm Business Name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let farm of farms; let i = index">
+                <th routerLink="/farmDetail/{{farm.id}}"># {{i + 1}}</th>
+                <td routerLink="/farmDetail/{{farm.id}}">{{farm.ownerName | titlecase}}</td>
+                <td routerLink="/farmDetail/{{farm.id}}">{{farm.ownerEmail}}</td>
+                <td routerLink="/farmDetail/{{farm.id}}">{{farm.phone[0] + '' + farm.phone[1] + ' / ' + farm.phone[2] + '' + farm.phone[3] + '' + farm.phone[4] + ' ' + farm.phone[5] + '' + farm.phone[6] + '' +farm.phone[7]}}</td>
+                <td routerLink="/farmDetail/{{farm.id}}">{{farm.farmName}}</td>
+                <td> <button class="btn btn-primary" (click)="send(farm.ownerEmail, farm.id)">Approve</button> </td>
+                <td> <button class="btn btn-danger" [disabled]="disable" (click)="reject(farm.id)">Reject</button> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

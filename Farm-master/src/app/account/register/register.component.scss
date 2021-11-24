@@ -1,0 +1,28 @@
+.card {
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  transition: box-shadow .25s;
+  position: relative;
+
+}
+body {
+  background-image:    url(../../../assets/images/bg1.jpg);
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;              /* optional, center the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+i:hover {
+  opacity: 0.5;
+}
+.btn.btn-primary {
+  background-color: #88c13e !important;
+  color: #fff;
+}

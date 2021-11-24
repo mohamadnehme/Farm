@@ -1,0 +1,17 @@
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-8">
+        <app-checkout-payment [payment]="payment" [checkoutForm]="checkoutForm"></app-checkout-payment>
+      </div>
+      <div class="col-4">
+        <app-order-totals
+        *ngIf="payment"
+        [farmName]="payment.farmeName"
+        [price]="payment.price"
+        [quantity]="payment.quantity"
+        [total]="payment.total"
+    ></app-order-totals>
+      </div>
+  </div>
+</div>

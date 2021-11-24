@@ -1,0 +1,97 @@
+<div id="content" class="p-4 p-md-5 pt-5">
+  <button class="btn btn-light" (click)="back()">Back</button>
+<div class="mt-5 card center" style="width: 1500px;" *ngIf="product">
+
+    <img *ngIf="product.pictureUrl !== ''" src="{{product.pictureUrl }}" alt="{{product.name}}" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+    <img *ngIf="product.pictureUrl === ''" src="{{'../../../../../assets/images/placeholder.png'}}" alt="{{product.name}}" class="img-fluid bg-light">
+    <span class="dot">
+      <img src="../../../assets/images/l.png" alt="" style="height: 200px; margin-left: 7px;">
+    </span>
+    <span class="rec">
+      <h3 style="margin-top: 100px; margin-left: 100px;"
+      *ngIf="((product.totalQuantity - product.unitQuantity)/product.totalQuantity) * 100 === 100;">This package has closed</h3>
+      <h3 style="margin-top: 100px; margin-left: 100px;"
+      *ngIf="((product.totalQuantity - product.unitQuantity)/product.totalQuantity) * 100 !== 100;">This package is available</h3>
+    </span>
+    <div role="progressbar" class="dotg" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:{{((product.totalQuantity - product.unitQuantity)/product.totalQuantity) * 100}}"></div>
+    <span class="dotin">
+      <h1 style="margin-top: 30px;">
+        {{float2int(((product.totalQuantity - product.unitQuantity)/product.totalQuantity) * 100)}}% <br>Funded
+      </h1>
+    </span>
+    <div class="col-5" style="margin-left: 280px;">
+      <span style="color: black; font-size: 2.5rem; margin-top: 10px;"> {{product.name}} </span><br>
+      <span style="font-size: 1.5em; position: relative;">{{product.location}}</span><br>
+      <p style="font-size: 2em; color: #88c13e; font-weight: 500;">{{product.price | currency}} Per Unit</p>
+    </div>
+    <div style="margin-left: 280px; margin-top: 40px;">
+      <h1 style="color: black;">Farm Package Details</h1>
+      <h2>ROI : {{product.roi}} %</h2>
+      <h2>Farm Cycle : {{product.farmCycle}} months</h2>
+      <h2>Available Units : {{product.unitQuantity}}</h2>
+    </div>
+    <div *ngIf="(currentUser$ | async) !== null && !product.isSoldOut" class="d-flex justify-content-start align-items-center" style="margin-left: 900px; position: absolute; margin-top: 540px;">
+      <i *appHasRole="['employee']"  (click)="decrementQuantity()" class="fa fa-minus-circle mr-2" style="cursor: pointer; font-size: 2em; margin-right: 8px; margin-left: 35px; color: #88c13e;"></i>
+      <span *appHasRole="['employee']"  class="font-weight-bold" style="font-size: 1.5em;"> {{quantity}} </span>
+      <i *appHasRole="['employee']"  (click)="incrementQuantity()" class="fa fa-plus-circle mx-2" style="cursor: pointer; font-size: 2em; color: #88c13e;"></i>
+      <button *appHasRole="['employee']" style="position: absolute; margin-top: 100px; width: 150px;"
+        (click)="createPaymentIntent(product)"
+        class="btn btn-outline-primary btn-lg">
+        Invest Now
+      </button>
+    </div>
+
+    <hr width="100%" style=" color: black; margin-top: 50px;">
+
+    <div class="container" style="margin-top: 50px;">
+
+        <div class="d-flex justify-content-center align-items-center">
+        <div>
+          <h2 class="d-flex justify-content-center align-items-center">Investment Amount</h2>
+          <h2 class="d-flex justify-content-center align-items-center"> {{product.price * quantity}} </h2>
+        </div>
+        <hr style="height: 120px; width: 2px; margin-right: 100px; margin-left: 100px; color: black;">
+        <div>
+          <h2 class="d-flex justify-content-center align-items-center">Interest</h2>
+          <h2 class="d-flex justify-content-center align-items-center"> {{product.interest * quantity}} </h2>
+        </div>
+        <hr style="height: 120px; width: 2px; margin-left: 100px; margin-right: 100px; color: black;">
+        <div>
+          <h2 class="d-flex justify-content-center align-items-center">Expected Returns</h2>
+          <h2 class="d-flex justify-content-center align-items-center"> {{(product.interest + product.price) * quantity}} </h2>
+        </div>
+      </div>
+
+    </div>
+    <div style="background-color: #33a82f; color: white; margin-top: 50px;">
+      <div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+        <h1 style="font-weight: 500;">Description</h1>
+        <p  style="color: white;"> {{product.description}}</p>
+      </div>
+    </div>
+    <div  *appHasRole="['admin']" class="container" style="margin-top: 70px;">
+      <table class="table table-hover">
+        <caption>List of investors</caption>
+        <thead>
+          <tr style="text-align: center;">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of product.investers" style="text-align: center;">
+            <td><pre style="margin-top: 15px; font-weight: bold; font-size: medium; font-family: Arial, Helvetica, sans-serif;">{{user.firstName}} {{user.lastName}}</pre></td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.unitQuantity}}</td>
+            <td>{{user.price | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,74 @@
+<ngx-spinner>
+  <h3>Loading...</h3>
+</ngx-spinner>
+<app-nav-bar *ngIf="!signin && !signup"></app-nav-bar>
+<div *ngIf="!signin && !signup">
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar" [ngClass]="{ 'active': shopService.navbarOpen }" class="fixed-bottom overflow-auto" *ngIf="(currentUser$ | async)">
+    <div class="custom-menu">
+    </div>
+    <div class="p-4">
+      <span *ngIf="(currentUser$ | async).role === 'employee'" style="color: white; font-weight: 500; font-size: 27px;">User Menu</span>
+      <span *ngIf="(currentUser$ | async).role === 'admin'" style="color: white; font-weight: 500; font-size: 27px;">Admin Menu</span>
+      <ul class="list-unstyled components mb-5" style="margin-top: 20px;">
+        <li>
+          <a routerLink="/" class="p-2" routerLinkActive="active">
+            <span class="fa fa-home mr-3" style="margin-right: 10px;"></span> Home</a>
+        </li>
+        <li>
+          <a *ngIf="(currentUser$ | async).role === 'employee'" routerLink="/dashboard" class="p-2" routerLinkActive="active">
+            <span class="fa fa-dashboard mr-3" style="margin-right: 10px;"></span> Dashborad</a>
+        </li>
+        <li>
+          <a routerLink="/shop" class="p-2" routerLinkActive="active">
+            <span class="fa fa-shopping-cart mr-3" style="margin-right: 10px;"></span> Catalogue</a>
+        </li>
+
+        <li>
+          <a *ngIf="(currentUser$ | async).role === 'admin'" routerLink="/admin" class="p-2" routerLinkActive="active">
+            <span class="fa fa-plus mr-3" style="margin-right: 10px;"></span> Create Farm</a>
+        </li>
+
+        <li>
+          <a *ngIf="(currentUser$ | async).role === 'admin'" routerLink="/farm" class="p-2" routerLinkActive="active">
+            <span class="fa fa-refresh mr-3" style="margin-right: 10px;"> </span>Check Proposal</a>
+        </li>
+
+        <li>
+          <a *ngIf="(currentUser$ | async).role === 'admin'" routerLink="/farmApproval" class="p-2" routerLinkActive="active">
+            <span class="fa fa-check mr-3" style="margin-right: 10px;"> </span>Approved Proposals</a>
+        </li>
+
+        <li>
+          <a *ngIf="(currentUser$ | async).role === 'admin'" routerLink="/users" class="p-2" routerLinkActive="active">
+            <span class="fa fa-user mr-3" style="margin-right: 5px;"></span> &nbsp; View Users</a>
+        </li>
+
+        <li>
+          <a class="p-2" *ngIf="(currentUser$ | async).role === 'employee'" routerLink="/createFarm" routerLinkActive="active">
+            <span class="fa fa-plus mr-3" style="margin-right: 10px;"></span> Create Proposal</a>
+        </li>
+        <li>
+          <a class="p-2" routerLink="/about" routerLinkActive="active">&nbsp;
+            <span class="fa fa-info mr-3" style="margin-right: 10px;" ></span> &nbsp; About Us</a>
+        </li>
+        <li>
+          <a class="p-2" routerLink="/contact" routerLinkActive="active">
+            <span class="fa fa-paper-plane mr-3" style="margin-right: 10px;"></span> Contact Us</a>
+        </li>
+        <li>
+          <a class="p-2" (click)="logout()" routerLinkActive="active">
+            <span class="fa fa-sign-out mr-3" style="margin-right: 10px;"></span> &nbsp; Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<div id="content">
+  <router-outlet></router-outlet>
+</div>
+</div>
+</div>
+
+<app-login *ngIf="signin"></app-login>
+<app-register *ngIf="signup"></app-register>
